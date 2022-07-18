@@ -1,11 +1,15 @@
+local rpls = game:GetService("ReplicatedStorage")
 local vu = game:GetService("VirtualUser")
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-   wait(1)
-   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-end) while wait(45) do
-local ohString1 = "Please come donate at my stand! Highest donor gets to be on my sign!"
-local ohString2 = "All"
+local plrs = game:GetService("Players")
 
-game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(ohString1, ohString2)
+plrs.LocalPlayer.Idled:connect(function()
+    local v2 = Vector2.new(0,0)
+    local cf = workspace.CurrentCamera.CFrame
+    vu:Button2Down(v2,cf)
+    task.wait(1)
+    vu:Button2Up(v2,cf)
+end)
+
+while task.wait(45) do
+    rpls.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please come donate at my stand! Highest donor gets to be on my sign!", "All")
 end
